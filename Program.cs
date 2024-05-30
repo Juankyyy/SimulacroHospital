@@ -18,6 +18,7 @@ builder.Services.AddDbContext<SimulacroHospitalContext>(options =>
 
 builder.Services.AddScoped<IEspecialidadRepository, EspecialidadRepository>();
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 
 
 var app = builder.Build();
