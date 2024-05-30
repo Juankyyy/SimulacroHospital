@@ -22,3 +22,17 @@ DROP TABLE Medicos;
 
 INSERT INTO Medicos (NombreCompleto, EspecialidadId, Correo, Telefono, Estado)
 VALUES ("Juanky", 1, "Juancamiloh960@gmail.com", 3177777777, "Activo");
+
+CREATE TABLE Pacientes (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Nombres VARCHAR(125) NOT NULL,
+    Apellidos VARCHAR(125) NOT NULL,
+    FechaNacimiento DATE NOT NULL,
+    Correo VARCHAR(125) NOT NULL UNIQUE,
+    Telefono VARCHAR(75) NOT NULL,
+    Direccion VARCHAR(125) NOT NULL,
+    Estado ENUM("Activo", "Inactivo") NOT NULL
+);
+
+INSERT INTO Pacientes (Nombres, Apellidos, FechaNacimiento, Correo, Telefono, Direccion, Estado)
+VALUES ("Mateo", "V", "2002-05-05", "mateo@gmail.com", "3100000000", "Calle 1 #11-D", "Activo");

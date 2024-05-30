@@ -9,5 +9,6 @@ namespace SimulacroHospital.Data
 
         public DbSet<Especialidad> Especialidades { get; set; }
         public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
     }
 }
