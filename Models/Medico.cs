@@ -13,7 +13,6 @@ namespace SimulacroHospital.Models
         [Required]
         public int EspecialidadId { get; set; }
 
-        [Required]
         public Especialidad? Especialidad { get; set; }
 
         [Required]
