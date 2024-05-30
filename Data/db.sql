@@ -11,7 +11,7 @@ VALUES ("Psiquiatría", "Estudio de los trastornos mentales​ de origen genéti
 CREATE TABLE Medicos (
     Id INT PRIMARY KEY AUTO_INCREMENT,
     NombreCompleto VARCHAR(125) NOT NULL,
-    EspecialidadId INT,
+    EspecialidadId INT NOT NULL,
     FOREIGN KEY (EspecialidadId) REFERENCES Especialidades(Id),
     Correo VARCHAR(125) NOT NULL UNIQUE,
     Telefono VARCHAR(75) NOT NULL,
@@ -36,3 +36,16 @@ CREATE TABLE Pacientes (
 
 INSERT INTO Pacientes (Nombres, Apellidos, FechaNacimiento, Correo, Telefono, Direccion, Estado)
 VALUES ("Mateo", "V", "2002-05-05", "mateo@gmail.com", "3100000000", "Calle 1 #11-D", "Activo");
+
+CREATE TABLE Citas (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    MedicoId INT NOT NULL,
+    FOREIGN KEY (MedicoId) REFERENCES Medicos(Id),
+    PacienteId INT NOT NULL,
+    FOREIGN KEY (PacienteId) REFERENCES Pacientes(Id),
+    Fecha DATE NOT NULL,
+    Estado ENUM("Activo", "Inactivo") NOT NULL
+);
+
+INSERT INTO Citas (MedicoId, PacienteId, Fecha, Estado)
+VALUES (1, 1, "2024-05-30", "Activo")

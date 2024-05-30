@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SimulacroHospital.Models
 {
@@ -27,5 +28,8 @@ namespace SimulacroHospital.Models
 
         [Required]
         public string? Estado { get; set; }
+
+        [JsonIgnore]
+        public List<Cita>? Citas { get; set;}
     }
 }

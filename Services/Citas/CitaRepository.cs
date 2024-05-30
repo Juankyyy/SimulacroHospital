@@ -4,38 +4,38 @@ using SimulacroHospital.Models;
 
 namespace SimulacroHospital.Services
 {
-    public class MedicoRepository : IMedicoRepository
+    public class CitaRepository : ICitaRepository
     {
         private readonly SimulacroHospitalContext _context;
 
-        public MedicoRepository(SimulacroHospitalContext context)
+        public CitaRepository(SimulacroHospitalContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Medico> GetAll()
+        public IEnumerable<Cita> GetAll()
         {
-            var medicos = _context.Medicos.Include(m => m.Especialidad).ToList();
+            var citas = _context.Citas.Include(m => m.Medico).Include(m => m.Paciente).ToList();
             
-            return medicos;
+            return citas;
         }
 
-        public Medico GetOne(int id)
+        public Cita GetOne(int id)
         {
-            var medico = _context.Medicos.Include(m => m.Especialidad).FirstOrDefault(m => m.Id == id);
+            var cita = _context.Citas.Include(m => m.Medico).Include(m => m.Paciente).FirstOrDefault(m => m.Id == id);
             
-            return medico;
+            return cita;
         }
 
-        public void Create(Medico medico)
+        public void Create(Cita cita)
         {
-            _context.Medicos.Add(medico);
+            _context.Citas.Add(cita);
             _context.SaveChanges();
         }
 
-        public void Update(Medico medico)
+        public void Update(Cita cita)
         {
-            _context.Medicos.Update(medico);
+            _context.Citas.Update(cita);
             _context.SaveChanges();
         }
 
