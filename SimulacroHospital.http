@@ -1,0 +1,6 @@
+@SimulacroHospital_HostAddress = http://localhost:5096
+
+GET {{SimulacroHospital_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
