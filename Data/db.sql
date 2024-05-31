@@ -49,3 +49,14 @@ CREATE TABLE Citas (
 
 INSERT INTO Citas (MedicoId, PacienteId, Fecha, Estado)
 VALUES (1, 1, "2024-05-30", "Activo")
+
+CREATE TABLE Tratamientos (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    CitaId INT NOT NULL,
+    FOREIGN KEY (CitaId) REFERENCES Citas(Id),
+    Descripcion TEXT NOT NULL,
+    Estado ENUM("Activo", "Inactivo") NOT NULL
+);
+
+INSERT INTO Tratamientos (CitaId, Descripcion, Estado)
+VALUES (1, "Vacunar un perro", "Activo");

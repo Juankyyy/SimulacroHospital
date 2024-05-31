@@ -23,5 +23,8 @@ namespace SimulacroHospital.Models
 
         [Required]
         public string? Estado { get; set; }
+
+        [JsonIgnore]
+        public List<Tratamiento>? Tratamientos { get; set;}
     }
 }

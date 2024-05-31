@@ -27,5 +27,8 @@ namespace SimulacroHospital.Models
 
         [JsonIgnore]
         public List<Cita>? Citas { get; set;}
+
+        // [JsonIgnore]
+        // public List<Tratamiento>? Tratamientos { get; set;}
     }
 }
