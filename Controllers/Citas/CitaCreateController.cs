@@ -27,6 +27,11 @@ namespace SimulacroHospital.AddControllers
             try
             {
                 _citaRepository.Create(cita);
+
+                // Enviar correo
+                MailController Email = new MailController();
+                Email.EnviarCorreo();
+
                 return Ok(cita);
             } catch (Exception ex)
             {
