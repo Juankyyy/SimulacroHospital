@@ -56,5 +56,27 @@ namespace SimulacroHospital.Services
             _context.Citas.Update(cita);
             _context.SaveChanges();
         }
+
+        // Adicionales
+        public IEnumerable<Cita> Appointments(int id)
+        {
+            var citasPaciente = _context.Citas.Include(m => m.Medico).Include(m => m.Paciente).Where(c => c.PacienteId == id);
+
+            return citasPaciente;
+        }
+
+        public IEnumerable<Cita> Date(DateOnly date)
+        {
+            var citasPaciente = _context.Citas.Include(m => m.Medico).Include(m => m.Paciente).Where(c => c.Fecha == date);
+
+            return citasPaciente;
+        }
+
+        public IEnumerable<Cita> MedicoDate(int id, DateOnly date)
+        {
+            var citasPaciente = _context.Citas.Include(m => m.Medico).Include(m => m.Paciente).Where(c => c.MedicoId == id).Where(c => c.Fecha == date);
+
+            return citasPaciente;
+        }
     }
 }
