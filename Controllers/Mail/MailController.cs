@@ -9,31 +9,28 @@ namespace SimulacroHospital.AddControllers
 {
     public class MailController
     {
-        public async void EnviarCorreo()
+        public async void EnviarCorreo(string email, string paciente, string medico, string especialidad, DateOnly fecha)
         {
             try
             {
                 string url = "https://api.mailersend.com/v1/email";
 
-                string jwtToken = "mlsn.ef00247ed1fe020a372413c12e9cd053354dadad66892799d0ad833f7a4f8e9f";
+                string jwtToken = "mlsn.7c087bff0e96037eee4c0c54f883daa8b92bf308730ca6282a78df85504c5edf";
 
                 var EmailMessage = new Email
                 {
-                    from = new From { email = "trial-yzkq340ooe34d796.mlsender.net" },
-                    to = new[]
-                    {
-                        new To { email = "juancamiloherrera960@gmail.com" }
-                    },
-                    subject = "Hola, este correo ha sido enviado con MailerSend",
-                    text = "Hola, Tu cita ha sido agendada :)",
-                    html = "Hola, Tu cita ha sido agendada :)"
+                    from = new From { email = "MS_XPsRZo@trial-yzkq340ooe34d796.mlsender.net" },
+                    to = [
+                        new To { email = email }
+                    ],
+                    subject = "Cita Médica",
+                    text = $"Hola, {paciente} tu cita ha sido agendada con el médico {medico} especialista en {especialidad} en la fecha {fecha}",
                 };
 
                 string jsonBody = JsonSerializer.Serialize(EmailMessage);
 
-                using (HttpClient client = new HttpClient())
+                using(HttpClient client = new HttpClient())
                 {
-                    client.DefaultRequestHeaders.Add("Content-Type", "application/json");
                     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {jwtToken}");
 
                     StringContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
@@ -45,9 +42,11 @@ namespace SimulacroHospital.AddControllers
                         string responseBody = await response.Content.ReadAsStringAsync();
                         Console.WriteLine("Respuesta del servidor:");
                         Console.WriteLine(responseBody);
+                        Console.WriteLine($"Se mandó correctamente el correo a {email} con el asunto: {EmailMessage.text}");
                     } else
                     {
                         Console.WriteLine($"La solicitud falló: {response.StatusCode}");
+                        Console.WriteLine(response);
                     }
                 }
             } catch
