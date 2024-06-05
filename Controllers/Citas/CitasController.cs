@@ -45,5 +45,60 @@ namespace SimulacroHospital.AddControllers
                 return StatusCode(500, $"Error al traer la cita con id {id}: {ex.Message}");
             }
         }
+
+        // Adicionales
+        [HttpGet, Route("Appointments/{id}")]
+        public ActionResult<IEnumerable<Cita>> GetAppointments(int id)
+        {
+            var citasPaciente = _citaRepository.Appointments(id);
+            
+            if (citasPaciente == null)
+            {
+                return BadRequest($"Citas del paciente con id {id} no encontrada");
+            }
+            try
+            {
+                return Ok(citasPaciente);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al traer las cita del paciente con id {id}: {ex.Message}");
+            }
+        }
+
+        [HttpGet, Route("Date/{date}")]
+        public ActionResult<IEnumerable<Cita>> GetAppointmentsDate(DateOnly date)
+        {
+            var citasPaciente = _citaRepository.Date(date);
+            
+            if (citasPaciente == null)
+            {
+                return BadRequest($"Citas en la fecha {date} no encontradas");
+            }
+            try
+            {
+                return Ok(citasPaciente);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al traer las citas con la fecha {date}: {ex.Message}");
+            }
+        }
+
+        [HttpGet, Route("DateMedico/{date}/{id}")]
+        public ActionResult<IEnumerable<Cita>> GetMedicosDate(int id, DateOnly date)
+        {
+            var citasPaciente = _citaRepository.MedicoDate(id, date);
+            
+            if (citasPaciente == null)
+            {
+                return BadRequest($"Citas del medico con id {id} en la fecha {date} no encontradas");
+            }
+            try
+            {
+                return Ok(citasPaciente);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al traer las citas del medico con id {id} con la fecha {date}: {ex.Message}");
+            }
+        }
     }
 }

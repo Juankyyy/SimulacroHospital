@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SimulacroHospital.Models;
 using SimulacroHospital.Services;
+using SimulacroHospital.AddControllers;
 
 namespace SimulacroHospital.AddControllers
 {
